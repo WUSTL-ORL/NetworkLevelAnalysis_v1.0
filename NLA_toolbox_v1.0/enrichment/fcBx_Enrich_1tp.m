@@ -55,6 +55,7 @@ dataOut.HGp=ones(Nnets*Nnets,1,'single');% Output HG p-value
 dataOut.HGpp=ones(Nnets*Nnets,1,'single');% Output HG perm p-value
 dataOut.HGppEW=ones(Nnets*Nnets,1,'single');% Output HG perm p-value
 dataOut.Np=Np;
+dataOut.TNidx = TNidx;
 
 c=logspace(-20,0,10001)';
        

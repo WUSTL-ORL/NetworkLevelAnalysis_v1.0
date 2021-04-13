@@ -86,21 +86,21 @@ RC = [5,4;10,2;8,2;12,5]; % specify row,column of network statistic to extract
 
 Nnets=length(IM.Nets);
 sizenets=dataOut.Np;
-for j=1:length(dataOut.TNidx);
-    nsize(dataOut.TNidx(j))=sizenets(j);
+for j=1:length(TNidx);
+    nsize(TNidx(j))=sizenets(j);
 end
 netsize=reshape(nsize,Nnets,Nnets,[]);
 
 params.roiradius=5;
 params.toDraw=0;
 for j=1:length(RC)    
-pairsOut{j}=View_Clear_Brain_ROI_Corr_fc2(Anat,dataIN.IM,RC(j,:),...
-    dataOut,dataIN.fc,0.05,params);
+pairsOut{j}=View_Clear_Brain_ROI_Corr_fc(Anat,IM,RC(j,:),...
+    dataOut,fc,0.05,params);
 end
 for j=1:size(RC,1)
     for g=1:length(params.group);
         name=params.group(g);name=name{1,1};
-NetStats.nets{j} = strcat(dataIN.IM.Nets{RC(j,1)},'-',dataIN.IM.Nets{RC(j,2)});
+NetStats.nets{j} = strcat(IM.Nets{RC(j,1)},'-',IM.Nets{RC(j,2)});
 NetStats.(name).Chipvals(j) =dataOut.Chi_EWpval(RC(j,1),RC(j,2),g);
 NetStats.(name).Chistats(j) =dataOut.Chi_stats(RC(j,1),RC(j,2),g); 
 NetStats.(name).Nethits(j)=size(pairsOut{1,j}{1,1},g);

@@ -141,7 +141,7 @@ disp(['Drawing ROIs for ',IM.Nets{NNsig(j,1)},...
 Draw_ROIs_Through_Cortex_3_Views(Anat,roi,Conn,params);
 end
 ax = findall(gcf, 'Type', 'axes');
-subplot(ax(2))
+subplot(ax(1))
 title([IM.Nets{NNsig(j,1)},'-',IM.Nets{NNsig(j,2)},...
      ', p < ',num2str(Pmax)])
     else
