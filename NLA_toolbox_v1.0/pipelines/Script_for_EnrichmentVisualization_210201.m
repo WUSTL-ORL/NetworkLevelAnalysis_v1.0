@@ -71,7 +71,7 @@ View_Clear_Brain_ROI_Corr_Multi(Anat,IM,RC,[],...[Row,Col]
 %Visualize each network pair with direction of fc
 for j=1:length(RC)
     pairsOut{j}=View_Clear_Brain_ROI_Corr_fc(Anat,IM,RC(j,:),...
-        dataOut,fc1,0.05,params);
+        dataOut,fc,0.05,params);
 end
 
 
