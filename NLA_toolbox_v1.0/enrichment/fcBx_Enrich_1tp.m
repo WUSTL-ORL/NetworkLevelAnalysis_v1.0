@@ -106,7 +106,7 @@ else % Run Permutation test
     parfor j=1:Ntests
             switch type
                 case 'Spearman'
-                    [~,pval0p]=MySpearman_HSB(Bx(randperm(Nsubjs)),fc');
+                    [~,pval0p]=MySpearman(Bx(randperm(Nsubjs)),fc');
                 case 'Pearson'
                     [~,pval0p]=corr(Bx(randperm(Nsubjs)),fc');
             end

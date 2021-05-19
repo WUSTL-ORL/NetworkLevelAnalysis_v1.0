@@ -8,21 +8,22 @@
 load('filepath to IM structure');
 
 % load connectivity data
-load('filepath to fc data');
+group1fc = load('filepath to group 1 fc data');
+group2fc = load('filepath to group 2 fc data');
+fc1 = group1fc;
+fc2 = group2fc;
 
 % load behavior data
 behavdata=importdata('filepath to behavioral data');
 
-% % Visualize rmat organized by IM file % %
-Matrix_Org3(rmatAve(IM.order,IM.order),...
-    IM.key,10,[-0.3,0.3],IM.cMap,1);
-
 %% plot average fc organized by networks
 
-% if z-values
-    rmatAve=FisherZ2R(mean(FisherR2Z(corrmat),3)); 
 % if r-values
-    rmatAve=mean(corrmat,3);
+    rmatAve1=mean(FisherR2Z(fc1),3);
+    rmatAve2=mean(FisherR2Z(fc2),3); 
+% if z-values
+    rmatAve1=mean(fc1,3);
+    rmatAve2=mean(fc2,3);
 
 % % load anat (surface file) % %
 load('MNI152nl_on_TT_coord_meshes_32k','MNIl','MNIr'); % MNI152 template in TT
@@ -31,8 +32,10 @@ Anat.CtxL=MNIl;Anat.CtxR=MNIr;
 Anat.alpha = 0.25; % how see through is mesh?
 clear MNIl MNIr
 
-% % Visualize rmat organized by IM file % %
-Matrix_Org3(rmatAve(IM.order,IM.order),...
+% % Visualize rmat organized by IM file % % 
+Matrix_Org3(rmatAve1(IM.order,IM.order),...
+    IM.key,10,[-0.3,0.3],IM.cMap,1);
+Matrix_Org3(rmatAve2(IM.order,IM.order),...
     IM.key,10,[-0.3,0.3],IM.cMap,1);
 
 % % Visualize IM Model on Brain with Network Names and Colors 
@@ -56,6 +59,11 @@ behavior2= Bx2;
 % make cell arrays to input into McNemar
 Bx = {behavior1 behavior2};
 
+fc = {fc1 fc2}; %if data (ROIs) already ordered into networks, can use this line
+%if your fc data are not ordered as networks, order them using below lines (EX: roi's are ordered left to right) 
+fc1_ordered = fc1(IM.order,IM.order);
+fc2_ordered = fc2(IM.order,IM.order);
+fc = {fc1_ordered,fc2_ordered}; %if fc data (ROIs) are not ordered into networks run lines 62-64
 %% 4. Enrichment & McNemar Analyses
 
 params.np = 10000; % number permutations
