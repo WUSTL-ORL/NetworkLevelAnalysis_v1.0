@@ -57,6 +57,11 @@ fc=FisherR2Z(corrmat);
 %if z values
 fc=corrmat;
 
+%% re-order fc
+%if your fc data are not ordered as networks, order them using below lines (EX: roi's are ordered left to right) 
+fc_ordered = fc(IM.order,IM.order);
+fc = fc_ordered;
+
 %% Set parameters
 params.np=1e4;        % Number of permutations: set to 1 to get simple stats
                       % Set to 1e4 to get reasonable distribution.
